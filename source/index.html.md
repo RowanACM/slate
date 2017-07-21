@@ -19,7 +19,7 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Rowan ACM API! You can use our API to access information about ACM.
 
 We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
@@ -120,17 +120,17 @@ This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://api.rowanacm.org/prod/sign-in`
 
 ### Query Parameters
 
-Parameter | Default | Description
+Parameter | Required | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+token | true | Your Firebase auth token
+
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — your auth token is different than your uid
 </aside>
 
 ## Get a Specific Kitten
