@@ -269,7 +269,7 @@
 <aside class="success">
 We plan on converting to standard API Keys in the future. If you want to help, let us know!
 </aside>
-<h1 id='methods'>Methods</h1><h2 id='sign-in-to-the-meeting'>Sign in to the meeting</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/sign-in?token<span class="o">=</span>YOUR_TOKEN
+<h1 id='methods'>Methods</h1><h2 id='sign-in-to-the-meeting'>Sign in to the meeting</h2><pre class="highlight shell tab-shell"><code>    curl -X GET https://api.rowanacm.org/prod/sign-in?token<span class="o">=</span>YOUR_TOKEN
 </code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
@@ -282,7 +282,7 @@ We plan on converting to standard API Keys in the future. If you want to help, l
 </span></code></pre>
 <p>You can only sign in while the meeting is in progress</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://api.rowanacm.org/prod/sign-in</code></p>
+<p><code>GET https://api.rowanacm.org/prod/sign-in</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -301,7 +301,7 @@ We plan on converting to standard API Keys in the future. If you want to help, l
 <aside class="warning">
 Remember — your auth token is different than your uid
 </aside>
-<h2 id='choose-change-your-committee'>Choose/change your committee</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/set-committees?token<span class="o">=</span>YOUR_TOKEN&amp;committees<span class="o">=</span>general,app
+<h2 id='choose-change-your-committee'>Choose/change your committee</h2><pre class="highlight shell tab-shell"><code>    curl -X GET https://api.rowanacm.org/prod/set-committees?token<span class="o">=</span>YOUR_TOKEN&amp;committees<span class="o">=</span>general,app
 </code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
@@ -317,7 +317,7 @@ Remember — your auth token is different than your uid
 
 <aside class="notice">If you want to leave a committee without choosing a new one, set your committee to general</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://api.rowanacm.org/prod/set-committees</code></p>
+<p><code>GET https://api.rowanacm.org/prod/set-committees</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -337,7 +337,7 @@ Remember — your auth token is different than your uid
 <td>A comma separated list of committee names</td>
 </tr>
 </tbody></table>
-<h2 id='get-user-info'>Get user info</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/get-user-info?token<span class="o">=</span>YOUR_TOKEN
+<h2 id='get-user-info'>Get user info</h2><pre class="highlight shell tab-shell"><code>    curl -X GET https://api.rowanacm.org/prod/get-user-info?token<span class="o">=</span>YOUR_TOKEN
 </code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
@@ -401,7 +401,7 @@ Remember — your auth token is different than your uid
 <td>Your firebase login token</td>
 </tr>
 </tbody></table>
-<h2 id='get-announcements'>Get announcements</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/get-announcements
+<h2 id='get-announcements'>Get announcements</h2><pre class="highlight shell tab-shell"><code>    curl -X GET https://api.rowanacm.org/prod/get-announcements
 </code></pre><pre class="highlight python tab-python"><code>    <span class="kn">import</span> <span class="nn">http.client</span>
 
     <span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s">"api.rowanacm.org"</span><span class="p">)</span>
@@ -442,7 +442,7 @@ Remember — your auth token is different than your uid
 </span></code></pre>
 <p>Get a list of ACM announcements sorted in chronological order</p>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>GET http://api.rowanacm.org/prod/get-announcements</code></p>
+<p><code>GET https://api.rowanacm.org/prod/get-announcements</code></p>
 <h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -462,7 +462,7 @@ Remember — your auth token is different than your uid
 <td>Filter announcements based on committee (Coming Soon)</td>
 </tr>
 </tbody></table>
-<h2 id='post-announcements'>Post announcements</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/post-announcement?token<span class="o">=</span>YOUR_TOKEN&amp;title<span class="o">=</span>Hello&amp;body<span class="o">=</span>World
+<h2 id='post-announcements'>Post announcements</h2><pre class="highlight shell tab-shell"><code>    curl -X GET https://api.rowanacm.org/prod/post-announcement?token<span class="o">=</span>YOUR_TOKEN&amp;title<span class="o">=</span>Hello&amp;body<span class="o">=</span>World
 </code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
@@ -474,7 +474,7 @@ Remember — your auth token is different than your uid
 </span></code></pre>
 <p>You must be an admin to post an announcement</p>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET http://api.rowanacm.org/prod/post-announcement</code></p>
+<p><code>GET https://api.rowanacm.org/prod/post-announcement</code></p>
 <h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
