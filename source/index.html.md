@@ -27,96 +27,29 @@ This example API documentation page was created with [Slate](https://github.com/
 
 # Authentication
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+Most resources require an API key. We are using the Firebase Auth Tokens. You can find more information on the [firebase documentation](https://firebase.google.com/docs/auth/admin/verify-id-tokens#retrieve_id_tokens_on_clients)
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+We plan on converting to standard API Keys in the future. If you want to help, let us know!
 </aside>
 
-# Kittens
+# Methods
 
-## Get All Kittens
+## Sign in to the meeting
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> Returns JSON structured like this:
 
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "message": "You signed in to the meeting",
+    "status": "OK",
+    "response_code": 200
   }
 ]
 ```
 
-This endpoint retrieves all kittens.
+You can only sign in while the meeting is in progress
 
 ### HTTP Request
 
@@ -129,111 +62,91 @@ Parameter | Required | Description
 token | true | Your Firebase auth token
 
 
-<aside class="success">
+<aside class="warning">
 Remember — your auth token is different than your uid
 </aside>
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
+## Choose/change your committee
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "status": "OK",
+  "message": "You signed up for committees [general, app]"
 }
 ```
 
-This endpoint retrieves a specific kitten.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<aside class="warning">You can find the full list of committee names at the bottom of this page</aside>
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://api.rowanacm.org/prod/set-committees`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Parameter | Required | Description
+--------- | ----------- | ------------
+token | true | Your firebase auth token
+committees | true | A comma separated list of committee names
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+## Get user info
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    "phone_number": null,
+    "uid": "abc123",
+    "member_since": "September 2016",
+    "committee_string": "App Committee",
+    "profile_picture": "https://avatars.slack-edge.com/mypicture.jpg",
+    "is_admin": false,
+    "github_username": "JohnSmith",
+    "committee_list": [
+        "app"
+    ],
+    "name": "John Smith",
+    "slack_username": "johnsmith",
+    "on_slack": true,
+    "is_eboard": false,
+    "todo_list": [
+        {
+            "text": "Attend your first meeting",
+            "completed": true
+        },
+        {
+            "text": "Sign in to the meeting",
+            "completed": true
+        },
+        {
+            "text": "Sign up for Slack",
+            "completed": true
+        },
+        {
+            "text": "Choose a committee",
+            "completed": true
+        },
+        {
+            "text": "Join our Github organization",
+            "completed": true
+        }
+    ],
+    "meeting_count": 10,
+    "on_github": true,
+    "rowan_email": "smithj0@students.rowan.edu"
 }
 ```
 
-This endpoint retrieves a specific kitten.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`DELETE https://rowanacm.org/prod/get-user-info`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+Parameter | Required | Description
+--------- | ----------- | -------------
+token | true | Your firebase login token
 
