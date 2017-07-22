@@ -1,6 +1,6 @@
 # Errors
 
-<aside class="warning">TODO: These error codes are not in affect yet. Most responses, include errors, still return `200`</aside>
+<aside class="warning">TODO: These error codes are not in affect yet. Most responses, include errors, still return 200</aside>
 
 The API uses the following error codes:
 

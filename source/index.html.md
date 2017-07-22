@@ -4,7 +4,6 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
   - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -28,7 +27,7 @@ This example API documentation page was created with [Slate](https://github.com/
 
 Most resources require an API key. We are using the Firebase Auth Tokens. You can find more information on the [firebase documentation](https://firebase.google.com/docs/auth/admin/verify-id-tokens#retrieve_id_tokens_on_clients)
 
-<aside class="notice">
+<aside class="success">
 We plan on converting to standard API Keys in the future. If you want to help, let us know!
 </aside>
 
@@ -36,16 +35,18 @@ We plan on converting to standard API Keys in the future. If you want to help, l
 
 ## Sign in to the meeting
 
+```shell
+    curl -X GET http://api.rowanacm.org/prod/sign-in?token=YOUR_TOKEN
+```
+
 > Returns JSON structured like this:
 
 ```json
-[
-  {
-    "message": "You signed in to the meeting",
-    "status": "OK",
-    "response_code": 200
-  }
-]
+{
+  "message": "You signed in to the meeting",
+  "status": "OK",
+  "response_code": 200
+}
 ```
 
 You can only sign in while the meeting is in progress
@@ -67,9 +68,11 @@ Remember — your auth token is different than your uid
 
 ## Choose/change your committee
 
-Don't like your committee? No problem
+```shell
+    curl -X GET http://api.rowanacm.org/prod/set-committees?token=YOUR_TOKEN&committees=general,app
+```
 
-> The above command returns JSON structured like this:
+> Returns JSON structured like this:
 
 ```json
 {
@@ -77,6 +80,8 @@ Don't like your committee? No problem
   "message": "You signed up for committees [general, app]"
 }
 ```
+
+Don't like your committee? No problem
 
 The committee names are general, app, ai, web, robotics, and game.
 
@@ -96,7 +101,11 @@ committees | true | A comma separated list of committee names
 
 ## Get user info
 
-> The above command returns JSON structured like this:
+```shell
+    curl -X GET http://api.rowanacm.org/prod/get-user-info?token=YOUR_TOKEN
+```
+
+> Returns JSON structured like this:
 
 ```json
 {
@@ -148,7 +157,7 @@ committees | true | A comma separated list of committee names
 
 ### HTTP Request
 
-`DELETE https://rowanacm.org/prod/get-user-info`
+`GET https://rowanacm.org/prod/get-user-info`
 
 ### URL Parameters
 
@@ -158,6 +167,22 @@ token | true | Your firebase login token
 
 
 ## Get announcements
+
+```shell
+    curl -X GET http://api.rowanacm.org/prod/get-announcements
+```
+
+```python
+    import http.client
+
+    conn = http.client.HTTPConnection("api.rowanacm.org")
+    conn.request("GET", "/prod/get-announcements")
+
+	res = conn.getresponse()
+	data = res.read()
+
+	print(data.decode("utf-8"))
+```
 
 > Returns JSON structured like this:
 
@@ -172,17 +197,6 @@ token | true | Your firebase login token
         "url": null,
         "text": "Considering that it's July, I'd doubt you thought that was was a meeting today. But if you weren't sure, there's not.",
         "title": "No meeting today",
-        "icon": "https://firebasestorage.googleapis.com/myimage.png"
-    },
-    {
-        "snippet": "Hey everyone, I just wanted to give everyone a heads up that back to the boro applications are due April 9th",
-        "timestamp": 1491426391,
-        "committee_id": "robotics",
-        "committee": "Robotics Committee",
-        "author": "John",
-        "url": null,
-        "text": "Hey everyone, I just wanted to give everyone a heads up that back to the boro applications are due April 9th",
-        "title": "Back To The Boro Reminder",
         "icon": "https://firebasestorage.googleapis.com/myimage.png"
     },
     {
@@ -209,12 +223,16 @@ Get a list of ACM announcements sorted in chronological order
 
 Parameter | Required | Description
 --------- | ------- | -----------
-limit | false | Limit the number of responses (COMING SOON)
-filter | false | Filter announcements based on committee (COMING SOON)
+limit | false | Limit the number of responses (Coming Soon)
+filter | false | Filter announcements based on committee (Coming Soon)
 
 
 
 ## Post announcements
+
+```shell
+    curl -X GET http://api.rowanacm.org/prod/post-announcement?token=YOUR_TOKEN&title=Hello&body=World
+```
 
 > Returns JSON structured like this:
 
