@@ -36,7 +36,7 @@ We plan on converting to standard API Keys in the future. If you want to help, l
 ## Sign in to the meeting
 
 ```shell
-    curl -X GET http://api.rowanacm.org/prod/sign-in?token=YOUR_TOKEN
+    curl -X GET https://api.rowanacm.org/prod/sign-in?token=YOUR_TOKEN
 ```
 
 > Returns JSON structured like this:
@@ -53,7 +53,7 @@ You can only sign in while the meeting is in progress
 
 ### HTTP Request
 
-`GET http://api.rowanacm.org/prod/sign-in`
+`GET https://api.rowanacm.org/prod/sign-in`
 
 ### Query Parameters
 
@@ -69,7 +69,7 @@ Remember — your auth token is different than your uid
 ## Choose/change your committee
 
 ```shell
-    curl -X GET http://api.rowanacm.org/prod/set-committees?token=YOUR_TOKEN&committees=general,app
+    curl -X GET https://api.rowanacm.org/prod/set-committees?token=YOUR_TOKEN&committees=general,app
 ```
 
 > Returns JSON structured like this:
@@ -90,7 +90,7 @@ The committee names are general, app, ai, web, robotics, and game.
 
 ### HTTP Request
 
-`GET http://api.rowanacm.org/prod/set-committees`
+`GET https://api.rowanacm.org/prod/set-committees`
 
 ### URL Parameters
 
@@ -102,7 +102,7 @@ committees | true | A comma separated list of committee names
 ## Get user info
 
 ```shell
-    curl -X GET http://api.rowanacm.org/prod/get-user-info?token=YOUR_TOKEN
+    curl -X GET https://api.rowanacm.org/prod/get-user-info?token=YOUR_TOKEN
 ```
 
 > Returns JSON structured like this:
@@ -169,7 +169,7 @@ token | true | Your firebase login token
 ## Get announcements
 
 ```shell
-    curl -X GET http://api.rowanacm.org/prod/get-announcements
+    curl -X GET https://api.rowanacm.org/prod/get-announcements
 ```
 
 ```python
@@ -217,7 +217,7 @@ Get a list of ACM announcements sorted in chronological order
 
 ### HTTP Request
 
-`GET http://api.rowanacm.org/prod/get-announcements`
+`GET https://api.rowanacm.org/prod/get-announcements`
 
 ### Query Parameters
 
@@ -231,7 +231,7 @@ filter | false | Filter announcements based on committee (Coming Soon)
 ## Post announcements
 
 ```shell
-    curl -X GET http://api.rowanacm.org/prod/post-announcement?token=YOUR_TOKEN&title=Hello&body=World
+    curl -X GET https://api.rowanacm.org/prod/post-announcement?token=YOUR_TOKEN&title=Hello&body=World
 ```
 
 > Returns JSON structured like this:
@@ -247,7 +247,7 @@ You must be an admin to post an announcement
 
 ### HTTP Request
 
-`GET http://api.rowanacm.org/prod/post-announcement`
+`GET https://api.rowanacm.org/prod/post-announcement`
 
 ### Query Parameters
 
