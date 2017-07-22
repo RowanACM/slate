@@ -3,7 +3,6 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
   - python
   - javascript
 
@@ -68,6 +67,8 @@ Remember — your auth token is different than your uid
 
 ## Choose/change your committee
 
+Don't like your committee? No problem
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -77,8 +78,10 @@ Remember — your auth token is different than your uid
 }
 ```
 
+The committee names are general, app, ai, web, robotics, and game.
 
-<aside class="warning">You can find the full list of committee names at the bottom of this page</aside>
+
+<aside class="notice">If you want to leave a committee without choosing a new one, set your committee to general</aside>
 
 ### HTTP Request
 
@@ -139,6 +142,9 @@ committees | true | A comma separated list of committee names
 }
 ```
 
+<aside class="notice">We are not currently collecting your phone number. The field is there if we decide to use it in the future.</aside>
+
+
 
 ### HTTP Request
 
@@ -150,3 +156,87 @@ Parameter | Required | Description
 --------- | ----------- | -------------
 token | true | Your firebase login token
 
+
+## Get announcements
+
+> Returns JSON structured like this:
+
+```json
+[
+    {
+        "snippet": "Considering that it's July, I'd doubt you thought that was was a meeting today. But if you weren't sure, there's not.",
+        "timestamp": 1500647954,
+        "committee_id": "general",
+        "committee": "General",
+        "author": "Tyler",
+        "url": null,
+        "text": "Considering that it's July, I'd doubt you thought that was was a meeting today. But if you weren't sure, there's not.",
+        "title": "No meeting today",
+        "icon": "https://firebasestorage.googleapis.com/myimage.png"
+    },
+    {
+        "snippet": "Hey everyone, I just wanted to give everyone a heads up that back to the boro applications are due April 9th",
+        "timestamp": 1491426391,
+        "committee_id": "robotics",
+        "committee": "Robotics Committee",
+        "author": "John",
+        "url": null,
+        "text": "Hey everyone, I just wanted to give everyone a heads up that back to the boro applications are due April 9th",
+        "title": "Back To The Boro Reminder",
+        "icon": "https://firebasestorage.googleapis.com/myimage.png"
+    },
+    {
+        "snippet": "We just passed 100 followers on Twitter! Unfortunately that's in base 2. Help us get up to 1000 by following us @RowanACM",
+        "timestamp": 1487393994,
+        "committee_id": "general",
+        "committee": "General",
+        "author": null,
+        "url": "https://twitter.com/rowanacm",
+        "text": "We just passed 100 followers on Twitter! Unfortunately that's in base 2. Help us get up to 1000 by following us @RowanACM",
+        "title": "Follow @RowanACM on Twitter!",
+        "icon": "https://firebasestorage.googleapis.com/myimage.png"
+    }
+]
+```
+
+Get a list of ACM announcements sorted in chronological order
+
+### HTTP Request
+
+`GET http://api.rowanacm.org/prod/get-announcements`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+limit | false | Limit the number of responses (COMING SOON)
+filter | false | Filter announcements based on committee (COMING SOON)
+
+
+
+## Post announcements
+
+> Returns JSON structured like this:
+
+```json
+{
+  "status": "OK",
+  "message": "Announcement posted"
+}
+```
+
+You must be an admin to post an announcement
+
+### HTTP Request
+
+`GET http://api.rowanacm.org/prod/post-announcement`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+token | true | Firebase auth token
+title | true | Title of the announcement
+body | true | Announcement text
+committee | false | Default: General
+also_post_on_slack | false | Default: False
