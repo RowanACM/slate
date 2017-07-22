@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -213,7 +213,6 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -267,20 +266,19 @@
 <h1 id='authentication'>Authentication</h1>
 <p>Most resources require an API key. We are using the Firebase Auth Tokens. You can find more information on the <a href="https://firebase.google.com/docs/auth/admin/verify-id-tokens#retrieve_id_tokens_on_clients">firebase documentation</a></p>
 
-<aside class="notice">
+<aside class="success">
 We plan on converting to standard API Keys in the future. If you want to help, let us know!
 </aside>
-<h1 id='methods'>Methods</h1><h2 id='sign-in-to-the-meeting'>Sign in to the meeting</h2>
+<h1 id='methods'>Methods</h1><h2 id='sign-in-to-the-meeting'>Sign in to the meeting</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/sign-in?token<span class="o">=</span>YOUR_TOKEN
+</code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You signed in to the meeting"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"response_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You signed in to the meeting"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"response_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>You can only sign in while the meeting is in progress</p>
 <h3 id='http-request'>HTTP Request</h3>
@@ -303,17 +301,18 @@ We plan on converting to standard API Keys in the future. If you want to help, l
 <aside class="warning">
 Remember — your auth token is different than your uid
 </aside>
-<h2 id='choose-change-your-committee'>Choose/change your committee</h2>
-<p>Don&#39;t like your committee? No problem</p>
-
+<h2 id='choose-change-your-committee'>Choose/change your committee</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/set-committees?token<span class="o">=</span>YOUR_TOKEN&amp;committees<span class="o">=</span>general,app
+</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You signed up for committees [general, app]"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>Don&#39;t like your committee? No problem</p>
+
 <p>The committee names are general, app, ai, web, robotics, and game.</p>
 
 <aside class="notice">If you want to leave a committee without choosing a new one, set your committee to general</aside>
@@ -338,9 +337,10 @@ Remember — your auth token is different than your uid
 <td>A comma separated list of committee names</td>
 </tr>
 </tbody></table>
-<h2 id='get-user-info'>Get user info</h2>
+<h2 id='get-user-info'>Get user info</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/get-user-info?token<span class="o">=</span>YOUR_TOKEN
+</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -386,7 +386,7 @@ Remember — your auth token is different than your uid
 </span></code></pre>
 <aside class="notice">We are not currently collecting your phone number. The field is there if we decide to use it in the future.</aside>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE https://rowanacm.org/prod/get-user-info</code></p>
+<p><code>GET https://rowanacm.org/prod/get-user-info</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -401,7 +401,17 @@ Remember — your auth token is different than your uid
 <td>Your firebase login token</td>
 </tr>
 </tbody></table>
-<h2 id='get-announcements'>Get announcements</h2>
+<h2 id='get-announcements'>Get announcements</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/get-announcements
+</code></pre><pre class="highlight python tab-python"><code>    <span class="kn">import</span> <span class="nn">http.client</span>
+
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s">"api.rowanacm.org"</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"/prod/get-announcements"</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">))</span>
+</code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
 </blockquote>
@@ -415,17 +425,6 @@ Remember — your auth token is different than your uid
         </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Considering that it's July, I'd doubt you thought that was was a meeting today. But if you weren't sure, there's not."</span><span class="p">,</span><span class="w">
         </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No meeting today"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://firebasestorage.googleapis.com/myimage.png"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"snippet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey everyone, I just wanted to give everyone a heads up that back to the boro applications are due April 9th"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1491426391</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"committee_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"robotics"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"committee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Robotics Committee"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hey everyone, I just wanted to give everyone a heads up that back to the boro applications are due April 9th"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Back To The Boro Reminder"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://firebasestorage.googleapis.com/myimage.png"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -455,15 +454,16 @@ Remember — your auth token is different than your uid
 <tr>
 <td>limit</td>
 <td>false</td>
-<td>Limit the number of responses (COMING SOON)</td>
+<td>Limit the number of responses (Coming Soon)</td>
 </tr>
 <tr>
 <td>filter</td>
 <td>false</td>
-<td>Filter announcements based on committee (COMING SOON)</td>
+<td>Filter announcements based on committee (Coming Soon)</td>
 </tr>
 </tbody></table>
-<h2 id='post-announcements'>Post announcements</h2>
+<h2 id='post-announcements'>Post announcements</h2><pre class="highlight shell tab-shell"><code>    curl -X GET http://api.rowanacm.org/prod/post-announcement?token<span class="o">=</span>YOUR_TOKEN&amp;title<span class="o">=</span>Hello&amp;body<span class="o">=</span>World
+</code></pre>
 <blockquote>
 <p>Returns JSON structured like this:</p>
 </blockquote>
@@ -510,7 +510,7 @@ Remember — your auth token is different than your uid
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="warning">TODO: These error codes are not in affect yet. Most responses, include errors, still return `200`</aside>
+<aside class="warning">TODO: These error codes are not in affect yet. Most responses, include errors, still return 200</aside>
 
 <p>The API uses the following error codes:</p>
 
@@ -571,7 +571,6 @@ Remember — your auth token is different than your uid
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
